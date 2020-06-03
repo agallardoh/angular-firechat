@@ -1,7 +1,8 @@
 <h1>Chat</h1>
 <hr>
+
 <div class="app-mensajes" id="app-mensajes">
-    <div *ngFor="let chat of _cs.chats" class="text-right">
+    <div *ngFor="let chat of chats" class="text-right">
         <span class="badge badge-primary">Agustin</span>
         <p>{{ chat.mensaje }}</p>
     </div>
