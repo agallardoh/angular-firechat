@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,11 @@ export class ChatService {
   }
 
   login(proveedor: string) {
-    if (proveedor === 'google') {
-      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    if (proveedor === 'Google') {
+
+      this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     } else {
-      this.afAuth.auth.signInWithPopup(new auth.TwitterAuthProvider());
+      this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
     }
   }
   logout() {
@@ -57,9 +59,10 @@ export class ChatService {
 
     // TODO  Falta el uid del usuario
     const mensaje: Mensaje = {
-      nombre : 'Demo',
+      nombre : this.usuario.nombre,
       mensaje : texto,
-      fecha : new Date().getTime()
+      fecha : new Date().getTime(),
+      uid: this.usuario.uid
     };
 
     return this.itemsCollection.add( mensaje );
